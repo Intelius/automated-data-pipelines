@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dair-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dair-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: dair-app
+    spec:
+      containers:
+        - args:
+            - npm
+            - start
+          image: docker.io/inteliusai/dair-app_image:1.0
+          name: dair-app
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always 
+          env:
+            - name: API_URL_ROOT
+              valueFrom:
+                secretKeyRef:
+                  name: host-name
+                  key: API_URL_ROOT
+
+status: {}

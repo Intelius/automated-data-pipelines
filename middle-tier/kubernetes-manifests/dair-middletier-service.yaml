@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dair-middletier-service
+spec:
+  type: NodePort
+  ports:
+    - port: 3030
+      targetPort: 3030
+      nodePort: 30300
+  selector:
+    app: dair-middletier

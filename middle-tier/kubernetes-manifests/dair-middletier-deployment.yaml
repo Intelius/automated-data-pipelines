@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dair-middletier-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dair-middletier
+  strategy: {}
+  template:
+    metadata: 
+      labels:
+        app: dair-middletier
+    spec:
+      containers:
+        - args:
+            - python
+            - main.py
+          image: docker.io/inteliusai/dair-middletier_image:1.0
+          name: dair-middletier
+          ports:
+            - containerPort: 3030
+          imagePullPolicy: Always 
+
+status: {}

@@ -1,0 +1,18 @@
+
+auth:  
+  apisource: Polygon.io
+  token: TsDjd2WmFwYSsprdEaJkvXlrIRTBlCde
+  apiurl: https://api.polygon.io
+
+mysqlsettings:
+  dairdb: 'mysql+pymysql://root:BoosterPack202!@my-release-mysql.data.svc.cluster.local:3306/dair_boosterpack'
+
+finhub:
+  token: c7209kqad3ieuiu4i7tg
+
+tickersubscribelist:
+- AAL
+- MSFT
+- TSLA
+- AMD 
+- AAPL

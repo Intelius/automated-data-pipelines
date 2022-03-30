@@ -1,0 +1,213 @@
+.dashboard {
+  &-graph {
+    margin: 0 auto;
+  }
+}
+.navbar {
+  display: flex;
+  border: 1px solid lightgrey;
+  margin: 1rem;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+
+  &-date {
+    margin: 1rem;
+
+    &__options {
+      height: 1.2rem;
+      border: 1px solid lightgrey;
+      border-radius: 0.2rem;
+      padding: 0.5rem;
+    }
+  }
+
+  &-stock {
+    margin: 1rem;
+
+    &__options {
+      &-select {
+        height: 2.3rem;
+        border-color: lightgrey;
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+      }
+    }
+  }
+}
+
+.news-container {
+  max-width: 68.75rem;
+  margin: 5rem 0;
+}
+
+.news {
+  display: flex;
+  margin: 1rem;
+  align-items: stretch;
+  height: 255px;
+
+  &-img {
+    max-width: 40%;
+    min-width: 40%;
+    & img {
+      min-width: 100%;
+      max-width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+    }
+  }
+
+  &-description {
+    margin-left: 1rem;
+    max-width: 60%;
+    min-width: 60%;
+
+    &__publisher {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 1rem;
+      color: #a9a9a9;
+      font-size: 12px;
+    }
+
+    &__info {
+      text-align: left;
+      margin: 0 1rem;
+
+      &-p {
+        font-size: 14px;
+      }
+
+      & a {
+        font-size: 16px;
+        color: black;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    }
+
+    &__sentiment {
+      display: flex;
+      flex-wrap: wrap;
+
+      &-influence {
+        display: flex;
+        background-color: rgb(246, 246, 246);
+        border-radius: 0.5rem;
+        margin-right: 1rem;
+        align-items: center;
+
+        & p {
+          padding: 0 0.5rem;
+        }
+
+        &-value {
+          display: flex;
+          padding-right: 0.5rem;
+
+          & p {
+            padding: 0;
+          }
+        }
+      }
+
+      &-score {
+        border-radius: 0.5rem;
+        border: 1px solid rgb(64, 64, 64);
+        padding: 10px;
+        text-align: center;
+      }
+
+      &-positive {
+        border-radius: 0.5rem;
+        border: 1px solid green;
+        padding: 10px;
+        text-align: center;
+        color: green;
+      }
+
+      &-negative {
+        border-radius: 0.5rem;
+        border: 1px solid red;
+        padding: 10px;
+        text-align: center;
+        color: red;
+      }
+
+      & p {
+        margin: 0;
+      }
+    }
+  }
+
+  &-message {
+    text-align: center;
+    margin: 1rem 0;
+    &__disable {
+      display: none;
+    }
+  }
+
+  &-button {
+    text-align: center;
+    & button {
+      border: 1px solid black;
+      background-color: rgb(0255, 255, 255);
+      border-radius: 0.5rem;
+      padding: 10px;
+      margin: 0 1rem;
+    }
+
+    &__disable {
+      display: none;
+    }
+  }
+}
+
+#myDiv {
+  box-sizing: content-box !important;
+  margin: 0 auto;
+  width: 100% !important;
+}
+
+.stock-graph {
+  text-align: center;
+  margin: 5rem 1rem;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  border-bottom: 1px solid lightgrey;
+  margin: 1rem;
+  padding-bottom: 2rem;
+}
+
+select:focus {
+  outline: none;
+}
+
+.js-plotly-plot .plotly div {
+  margin: 0 auto !important;
+}
+
+.user-select-none.svg-container {
+  border: 1px solid black !important;
+}
+
+h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+h3 {
+  padding-left: 1rem;
+  margin-bottom: 3rem;
+}
+
+.display-none {
+  display: none;
+}

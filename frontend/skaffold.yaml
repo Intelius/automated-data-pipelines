@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta23
+kind: Config
+build:
+  artifacts:
+    - image: inteliusai/dair-middletier_image     
+      context: .
+      docker:
+        dockerfile: dockerfile
+  tagPolicy:
+    sha256: {}
+deploy:
+  kubectl:    
+    manifests:
+      - kubernetes-manifests/dair-app-deployment.yaml
+      - kubernetes-manifests/dair-app-service.yaml

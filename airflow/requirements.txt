@@ -1,0 +1,13 @@
+PyYAML
+shortuuid
+pytz
+pandas
+requests
+bs4
+newspaper3k
+pymysql
+sqlalchemy
+sendgrid
+kafka-python
+scikit-learn
+finta
