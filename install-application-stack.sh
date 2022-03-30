@@ -32,7 +32,7 @@ fi
 echo "Installing ADP release $RELEASENAME."
 
 source /etc/environment
-export RELEASEDIRNAME="automated-data-pipelines-toolkit-"$RELEASENAME
+export RELEASEDIRNAME="automated-data-pipelines-"$RELEASENAME
 
 if [ ! -z $2 ] 
 then 
@@ -52,44 +52,44 @@ wget https://github.com/Intelius/automated-data-pipelines/archive/$RELEASENAME.z
 unzip $RELEASENAME.zip
 
 # K8s Dashboard
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/code/k8sdashboard/
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/k8sdashboard/
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 helm repo update
 helm upgrade --install k8sdashboard kubernetes-dashboard/kubernetes-dashboard  -f ./dashboard-values.yaml --namespace dashboard --create-namespace
 
 # Airflow
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/code/airflow/
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/airflow/
 helm repo add apache-airflow https://airflow.apache.org
 helm repo update
 helm install airflow apache-airflow/airflow -n airflow --create-namespace -f values.yaml
 
 # Kafka
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/code/kafka/
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafka/
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install kafka bitnami/kafka -n data --create-namespace -f values.yaml
 
 #Kafdrop
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/code/kafdrop/
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafdrop/
 helm upgrade -i kafdrop chart -n data
 
 # MySQL
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/code/mysql/helm/
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/mysql/helm/
 # kubectl create configmap mysql-initdb-config --from-file=initScript.properties -n test-mysql
 helm install my-release bitnami/mysql -n data -f values.yaml
 
 # News Sentiment
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/code/news-sentiment
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/news-sentiment
 kubectl create namespace news-sentiment
 kubectl apply -f ./kubernetes-manifests/ -n news-sentiment
 
 # Middle-Tier
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/code/middle-tier
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/middle-tier
 kubectl create namespace middle-tier
 kubectl apply -f ./kubernetes-manifests/ -n middle-tier
 
 # Fontend
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/code/frontend
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/frontend
 kubectl create namespace frontend
 host_ip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 kubectl create secret generic host-name --from-literal=API_URL_ROOT=http://${host_ip}:30300 -n frontend
