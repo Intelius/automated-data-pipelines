@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: newssentiment-deployment
+spec:
+  selector:
+    matchLabels:
+      app: newssentiment
+  template:
+    metadata:
+      labels:
+        app: newssentiment
+    spec:
+      containers:
+      - name: newssentiment
+        image:  docker.io/inteliusai/dair_newssentiment-image:1.0
+        ports:
+        - containerPort: 6022    
+        imagePullPolicy: Always  

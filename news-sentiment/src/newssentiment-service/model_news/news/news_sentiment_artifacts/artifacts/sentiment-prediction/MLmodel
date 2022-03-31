@@ -1,0 +1,14 @@
+artifact_path: sentiment-prediction
+flavors:
+  keras:
+    data: data
+    keras_module: tensorflow.keras
+    keras_version: 2.4.0
+    save_format: tf
+  python_function:
+    data: data
+    env: conda.yaml
+    loader_module: mlflow.keras
+    python_version: 3.8.5
+run_id: 44603a528472494da3aa531cf2711bce
+utc_time_created: '2021-06-24 22:01:03.709780'
