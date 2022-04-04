@@ -32,7 +32,6 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': days_ago(1),
-    'catchup': False,
     'provide_context': True,
     'on_failure_callback': task_failure_callback,
 }
@@ -41,6 +40,7 @@ with DAG(
     'news-processing',
     description='Live News Processing DAG',
     schedule_interval='*/5 * * * *',
+    catchup=False,
     default_args=default_args
 ) as dag: 
 
