@@ -727,7 +727,7 @@ webserver:
   #   CSRF_ENABLED = True
 
   service:
-    type: LoadBalancer
+    type: NodePort
     ## service annotations
     annotations: {}
     ports:

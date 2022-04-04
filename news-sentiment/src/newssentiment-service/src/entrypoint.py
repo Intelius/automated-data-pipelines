@@ -78,7 +78,7 @@ def predict_main(news: News_Details):
             pass
         # Save results in DB
         try:
-            path = 'mysql+pymysql://root:BoosterPack202!@my-release-mysql.data.svc.cluster.local:3306/dair_boosterpack'
+            path = 'mysql+pymysql://root:BoosterPack202!@my-release-mysql.data.svc.cluster.local:3306/automated_data_pipelines'
             prediction_mysql_engine = create_engine(path)
             db_result.to_sql(con=prediction_mysql_engine, name="news_sentiment_prediction", if_exists='append', index=False)
             prediction_mysql_engine.dispose()

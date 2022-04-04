@@ -16,7 +16,7 @@ class onemindata(Base):
         Base.metadata,
         autoload=True,
         autoload_with=dair_boosterpackDB.engine,
-        schema="dair_boosterpack",
+        schema="automated_data_pipelines",
     )
 
 
@@ -27,7 +27,7 @@ class news_description(Base):
         Base.metadata,
         autoload=True,
         autoload_with=dair_boosterpackDB.engine,
-        schema="dair_boosterpack",
+        schema="automated_data_pipelines",
     )
 
 # ORM class for news sentiments data stored in news_sentiment_prediction generated from database schema
@@ -37,5 +37,5 @@ class news_sentiment_prediction(Base):
         Base.metadata,
         autoload=True,
         autoload_with=dair_boosterpackDB.engine,
-        schema="dair_boosterpack",
+        schema="automated_data_pipelines",
     )
