@@ -13,7 +13,7 @@ from sqlalchemy import create_engine
 from tensorflow import keras
 import logging
 
-app = FastAPI( title="i2 Trader - News Sentiment Prediction Service APIs ",
+app = FastAPI( title="News Sentiment Prediction Service APIs ",
         description="APIs for processing News by Ticker.",
         version="1.0.0")
 

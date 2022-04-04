@@ -24,7 +24,7 @@ def outer_task_callback(context, email, result):
         print(e.message) 
 
 default_args = {
-    'owner': 'i2airflow',
+    'owner': 'airflow',
     'depends_on_past': False,
     'concurrency': 1, 
     'start_date': days_ago(1),
