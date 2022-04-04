@@ -1,7 +1,7 @@
 # File that includes all of the general dependencies that will be needed by other endpoints
 
 from .dbConnections import (
-#  dair_boosterpack,
+#  automated_data_pipelines,
  dair_boosterpackDB
 )
 from datetime import datetime

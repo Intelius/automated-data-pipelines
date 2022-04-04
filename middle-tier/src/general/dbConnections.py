@@ -9,7 +9,7 @@ from sqlalchemy.pool import NullPool
 
 # Class that includes the engine and session maker for the application DB
 class dair_boosterpackDB:
-    dbString = os.environ["dair_boosterpack_mysql_engine"]
+    dbString = os.environ["automated_data_pipelines_mysql_engine"]
     engine = create_engine(
         dbString,
         pool_pre_ping=True,

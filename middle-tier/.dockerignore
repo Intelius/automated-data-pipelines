@@ -1,0 +1,8 @@
+.git
+*.log
+*.md
+/__pycache__/*
+*.pyc
+/vscode/*
+/.vscode/*
+.vscode/
