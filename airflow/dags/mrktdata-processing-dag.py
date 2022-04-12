@@ -26,7 +26,6 @@ def outer_task_callback(context, email, result):
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'concurrency': 1, 
     'start_date': days_ago(1),
     'provide_context': True,
     'on_failure_callback': task_failure_callback
@@ -37,6 +36,7 @@ with DAG(
     description='Live 1-min aggregated market data processing dag',
     schedule_interval='30 13 * * 1-5',
     catchup=False,
+    max_active_runs=1,
     default_args=default_args
     ) as dag:
 
