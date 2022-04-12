@@ -393,10 +393,15 @@ primary:
     selector: {}
   ## @param primary.extraVolumes [array] Optionally specify extra list of additional volumes to the MySQL Primary pod(s)
   ##
-  extraVolumes: []
+  extraVolumes: 
+    - name: init-script
+      configMap:
+        name: mysql-initdb-config
   ## @param primary.extraVolumeMounts [array] Optionally specify extra list of additional volumeMounts for the MySQL Primary container(s)
   ##
-  extraVolumeMounts: []
+  extraVolumeMounts: 
+    - name: init-script
+      mountPath: /docker-entrypoint-initdb.d
   ## @param primary.initContainers [array] Add additional init containers for the MySQL Primary pod(s)
   ##
   initContainers: []

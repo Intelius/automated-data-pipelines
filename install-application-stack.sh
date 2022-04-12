@@ -69,7 +69,7 @@ helm upgrade -i kafdrop chart -n data
 
 # MySQL
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/mysql/helm/
-# kubectl create configmap mysql-initdb-config --from-file=initScript.properties -n test-mysql
+kubectl apply -f initdb-config.yaml
 helm install my-release bitnami/mysql -n data -f values.yaml
 
 # News Sentiment

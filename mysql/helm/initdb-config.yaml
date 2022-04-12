@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-config
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS `automated_data_pipelines`;
+    USE `automated_data_pipelines`;
+
+    -- automated_data_pipelines.marketdata_1minute definition
+    CREATE TABLE `marketdata_1minute` (
+      `ticker` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+      `high` double DEFAULT NULL,
+      `low` double DEFAULT NULL,
+      `open` double DEFAULT NULL,
+      `close` double DEFAULT NULL,
+      `volume` bigint DEFAULT NULL,
+      `datetime` datetime NOT NULL,
+      `EMA9` double DEFAULT NULL,
+      PRIMARY KEY (`ticker`,`datetime`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+    -- automated_data_pipelines.news_description definition
+    CREATE TABLE `news_description` (
+      `id` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+      `title` text,
+      `author` varbinary(50) DEFAULT NULL,
+      `article_url` text,
+      `description` text,
+      `publisher` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+      `tickers` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+      `keywords` text,
+      `posttime` datetime DEFAULT NULL,
+      `image_url` text,
+      `datetime` datetime DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+    -- automated_data_pipelines.news_sentiment_prediction definition
+    CREATE TABLE `news_sentiment_prediction` (
+      `ticker` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+      `id` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+      `datetime` datetime NOT NULL,
+      `compound_influence_score` float DEFAULT NULL,
+      `sentiment_score` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+      `sector` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+      `posttime` datetime NOT NULL,
+      PRIMARY KEY (`ticker`,`id`,`datetime`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
