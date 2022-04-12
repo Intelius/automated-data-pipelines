@@ -59,7 +59,7 @@ def  DailyNewsPolygonMain(**kwargs):
     try:  
         confg = Configservice()
         tickers = ','.join(confg.getTickerList())
-        print("Read ticker news live data from API to silver every 5 mins from Polygon, starts:") 
+        print("Read ticker news live data from API every 5 mins from Polygon, starts:") 
         tickers_list = tickers.split(",") 
         import yaml
         from sqlalchemy import create_engine
