@@ -57,12 +57,6 @@ helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 helm repo update
 helm upgrade --install k8sdashboard kubernetes-dashboard/kubernetes-dashboard  -f ./dashboard-values.yaml --namespace dashboard --create-namespace
 
-# Airflow
-cd /home/$INSTALLUSER/$RELEASEDIRNAME/airflow/
-helm repo add apache-airflow https://airflow.apache.org
-helm repo update
-helm install airflow apache-airflow/airflow -n airflow --create-namespace -f values.yaml
-
 # Kafka
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafka/
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -82,6 +76,12 @@ helm install my-release bitnami/mysql -n data -f values.yaml
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/news-sentiment
 kubectl create namespace news-sentiment
 kubectl apply -f ./kubernetes-manifests/ -n news-sentiment
+
+# Airflow
+cd /home/$INSTALLUSER/$RELEASEDIRNAME/airflow/
+helm repo add apache-airflow https://airflow.apache.org
+helm repo update
+helm install airflow apache-airflow/airflow -n airflow --create-namespace -f values.yaml
 
 # Middle-Tier
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/middle-tier
