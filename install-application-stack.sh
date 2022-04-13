@@ -40,64 +40,64 @@ then
 else
     export INSTALLUSER=$(ls /home/* -d | head -n 1 | cut -d/ -f3)
 fi
-echo $"\nTargeting user $INSTALLUSER for application-code installation"
+echo -e "\nTargeting user $INSTALLUSER for application-code installation"
 export KUBECONFIG=/home/$INSTALLUSER/.kube/config
 kubectl config set-context microk8s
 cd /home/$INSTALLUSER
 
-echo $"\n\n Pulling zipped files ..."
+echo -e "\n\n Pulling zipped files ..."
 rm -rf $RELEASEDIRNAME # Clean out any old run
 rm $RELEASENAME.zip
 wget https://github.com/Intelius/automated-data-pipelines/archive/$RELEASENAME.zip
 unzip $RELEASENAME.zip
 
-echo $"\n\n Installing K8s Dashboard ..."
+echo -e "\n\n Installing K8s Dashboard ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/k8sdashboard/
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 helm repo update
 helm upgrade --install k8sdashboard kubernetes-dashboard/kubernetes-dashboard  -f ./dashboard-values.yaml --namespace dashboard --create-namespace
 
-echo $"\n\n Installing Apache Kafka ..."
+echo -e "\n\n Installing Apache Kafka ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafka/
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install kafka bitnami/kafka -n data --create-namespace -f values.yaml
 
-echo $"\n\n Installing Kafdrop ..."
+echo -e "\n\n Installing Kafdrop ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafdrop/
 helm upgrade -i kafdrop chart -n data
 
-echo $"\n\n Installing MySQL preloaded with the solution database schema ..."
+echo -e "\n\n Installing MySQL preloaded with the solution database schema ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/mysql/helm/
 kubectl apply -n data -f initdb-config.yaml 
 helm install my-release bitnami/mysql -n data -f values.yaml
 
-echo $"\n\n Installing News Sentiment Prediction service ..."
+echo -e "\n\n Installing News Sentiment Prediction service ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/news-sentiment
 kubectl create namespace news-sentiment
 kubectl apply -f ./kubernetes-manifests/ -n news-sentiment
 
-echo $"\n\n Installing Apache Airflow ..."
+echo -e "\n\n Installing Apache Airflow ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/airflow/
 helm repo add apache-airflow https://airflow.apache.org
 helm repo update
 helm install airflow apache-airflow/airflow -n airflow --create-namespace -f values.yaml
 
-echo $"\n\n Installing Middle-Tier Services ..."
+echo -e "\n\n Installing Middle-Tier Services ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/middle-tier
 kubectl create namespace middle-tier
 kubectl apply -f ./kubernetes-manifests/ -n middle-tier
 
-echo $"\n\n Installing Fontend (Presentation) Services ..."
+echo -e "\n\n Installing Fontend (Presentation) Services ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/frontend
 kubectl create namespace frontend
 host_ip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 kubectl create secret generic host-name --from-literal=API_URL_ROOT=http://${host_ip}:30300 -n frontend
 kubectl apply -f ./kubernetes-manifests/ -n frontend
 
-echo $"\n\n Finalizing the installation ..."
+echo -e "\n\n Finalizing the installation ..."
 chown -R $INSTALLUSER:$INSTALLUSER /home/$INSTALLUSER/$RELEASEDIRNAME/
 cd /home/$INSTALLUSER
 rm $RELEASENAME.zip
 
-echo $"\n\nCongratulations! Intelius Automated Data Pipelines (ADP) boosterpack has been successfully installed!"
+printf "\n\nCongratulations! Intelius Automated Data Pipelines (ADP) boosterpack has been successfully installed!"
