@@ -45,58 +45,59 @@ export KUBECONFIG=/home/$INSTALLUSER/.kube/config
 kubectl config set-context microk8s
 cd /home/$INSTALLUSER
 
-# Pull zipped files
+echo "\n\n Pulling zipped files ..."
 rm -rf $RELEASEDIRNAME # Clean out any old run
 rm $RELEASENAME.zip
 wget https://github.com/Intelius/automated-data-pipelines/archive/$RELEASENAME.zip
 unzip $RELEASENAME.zip
 
-# K8s Dashboard
+echo "\n\n Installing K8s Dashboard ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/k8sdashboard/
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 helm repo update
 helm upgrade --install k8sdashboard kubernetes-dashboard/kubernetes-dashboard  -f ./dashboard-values.yaml --namespace dashboard --create-namespace
 
-# Kafka
+echo "\n\n Installing Apache Kafka ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafka/
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install kafka bitnami/kafka -n data --create-namespace -f values.yaml
 
-#Kafdrop
+echo "\n\n Installing Kafdrop ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafdrop/
 helm upgrade -i kafdrop chart -n data
 
-# MySQL
+echo "\n\n Installing MySQL preloaded with the solution database schema ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/mysql/helm/
 kubectl apply -n data -f initdb-config.yaml 
 helm install my-release bitnami/mysql -n data -f values.yaml
 
-# News Sentiment
+echo "\n\n Installing News Sentiment Prediction service ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/news-sentiment
 kubectl create namespace news-sentiment
 kubectl apply -f ./kubernetes-manifests/ -n news-sentiment
 
-# Airflow
+echo "\n\n Installing Apache Airflow ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/airflow/
 helm repo add apache-airflow https://airflow.apache.org
 helm repo update
 helm install airflow apache-airflow/airflow -n airflow --create-namespace -f values.yaml
 
-# Middle-Tier
+echo "\n\n Installing Middle-Tier Services ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/middle-tier
 kubectl create namespace middle-tier
 kubectl apply -f ./kubernetes-manifests/ -n middle-tier
 
-# Fontend
+echo "\n\n Installing Fontend (Presentation) Services ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/frontend
 kubectl create namespace frontend
 host_ip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 kubectl create secret generic host-name --from-literal=API_URL_ROOT=http://${host_ip}:30300 -n frontend
 kubectl apply -f ./kubernetes-manifests/ -n frontend
 
+echo "\n\n Finalizing the installation ..."
 chown -R $INSTALLUSER:$INSTALLUSER /home/$INSTALLUSER/$RELEASEDIRNAME/
 cd /home/$INSTALLUSER
 rm $RELEASENAME.zip
 
-echo "Congratulations! Intelius Automated Data Pipelines (ADP) boosterpack has been successfully installed!"
+echo "\n\nCongratulations! Intelius Automated Data Pipelines (ADP) boosterpack has been successfully installed!"
