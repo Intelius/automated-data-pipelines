@@ -28,7 +28,7 @@ data:
       `article_url` text,
       `description` text,
       `publisher` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-      `tickers` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+      `tickers` text,
       `keywords` text,
       `posttime` datetime DEFAULT NULL,
       `image_url` text,
