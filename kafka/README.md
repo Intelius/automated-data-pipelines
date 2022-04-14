@@ -1,21 +1,20 @@
 # Introduction 
-    The Kafka Helm Chart deployment
-    Original git hub: https://github.com/bitnami/charts/tree/master/bitnami/kafka
-    Release number: 15.3.2
+## Chart repo
+https://github.com/bitnami/charts/tree/master/bitnami/kafka
 
-# Getting Started
-    This repository contains the configurations for kafka cluster for deployment on any Kubernetes cluser clusters
-    1.	By cloning this repo and running "helm install <<release_name>> bitnami/kafka -f values.yaml" the chart will be installed using the configurations existing in the values.yaml file.
-    2.	This can only be tested on a k8s cluster and can't be deployed standalone.
+## Helm chart info 
+https://artifacthub.io/packages/helm/bitnami/kafka
 
 # Installation
-    Run the following command:
-    helm repo add bitnami https://charts.bitnami.com/bitnami
-    helm upgrade -i kafka bitnami/kafka -n data -f values.yaml --debug
+Run these commands to go to the "kafka" folder and installing Apache Kafka using the configured helm chart after connecting to the VM using SSH and cloning this repository.
+```bash
+cd kafka
+helm repo add bitnami https://charts.bitnami.com/bitnami\
+helm upgrade -i kafka bitnami/kafka -n data -f values.yaml --debug
+```
 
 # Deployed Information
-    Kafka can be accessed by consumers via port 9092 on the following DNS name from within your cluster:
-
+    Kafka can be accessed by consumers via port 9092 on the following DNS name from within your cluster:\
         kafka.data.svc.cluster.local
 
     Each Kafka broker can be accessed by producers via port 9092 on the following DNS name(s) from within your cluster:

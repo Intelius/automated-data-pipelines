@@ -1,20 +1,34 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This folder contains the source code and configuration file for installing middle-tier service in ADP boosterpack. The output of the system can be retrieved using the APIs created in this service. This service represents an intermediary layer between the presentation and data service. In this solution, two APIs are created for accessing processed market and news data using FastAPI. While these APIs are supposed to be called by frontend services, they can be accessed using Swagger UI or Redoc interface. For more information, check official FastAPI documentation.  
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+The following sections explain how to install and customize this application
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Installing on a Kubernetes cluster 
+Run these commands to go to the "middle-tier" folder and instal this service after connecting to the VM using SSH and cloning this repository.
+```bash
+cd middle-tier
+kubectl create namespace middle-tier
+kubectl apply -f ./kubernetes-manifests/ -n middle-tier
+```
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Deploying changes in the code and build your own image
+To make changes in the code, you need to build your own image and push it to your DockerHub or any other container registry. Make sure to update the containers.image parameter in deployement configuration file (middle-tier\kubernetes-manifests\dair-middletier-deployment.yaml). 
+
+```bash
+cd middle-tier
+docker login
+docker build -t {DockerHubAccount}/{ImageName}:{TAG} . 
+docker push {DockerHubAccount}/{ImageName}:{TAG} 
+```
+## Removing the application
+To completely remove this application, you need to execute the following commands. If you don't want to delete the namespace, skip running the second command
+```bash
+kubectl delete deployment dair-middletier -n middle-tier
+kubectl delete namespace middle-tier
+```
+
+## Accessing APIs Swagger Interface 
+This service has been exposed as nodePort on port 30300. The Swagger interface for the APIs of this service can be accessed using this address: *{HOST_IP}:30300/docs*.
+

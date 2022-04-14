@@ -1,0 +1,2 @@
+This folder contains the configuration values file for installation of Kubernetes dashboard. \
+For more information refer to [ReadME file for Kubernetes dashboard in KAT boosterpack repository ](https://github.com/BigBitBusInc/kubernetes-automation-toolkit/tree/main/code/k8s-common-code/k8sdashboard). Simiar installation and configuration has been used for the purpose of this application
