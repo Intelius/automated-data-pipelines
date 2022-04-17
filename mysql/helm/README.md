@@ -13,9 +13,9 @@ cd mysql/helm/
 kubectl apply -n data -f initdb-config.yaml 
 helm install my-release bitnami/mysql -n data -f values.yaml
 ```
-Default credentials for creating a connection to this MySQL instance:\
-&nbsp;&nbsp;&nbsp;&nbsp;user: root\
-&nbsp;&nbsp;&nbsp;&nbsp;pass: BoosterPack202!
+## Default users: 
+- Super admin privilege: **user**: root; **password**: BoosterPack202! (super admin privilege)
+- Service account user with usage privilege on 'automated_data_pipelines' database: **user**: adp_serviceaccount ; **password**: dairDBPass
 # Post-deployement Information
   Execute the following to get the administrator credentials:
 

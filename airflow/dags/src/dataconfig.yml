@@ -5,7 +5,7 @@ auth:
   apiurl: https://api.polygon.io
 
 mysqlsettings:
-  dairdb: 'mysql+pymysql://root:BoosterPack202!@my-release-mysql.data.svc.cluster.local:3306/automated_data_pipelines'
+  dairdb: 'mysql+pymysql://adp_serviceaccount:dairDBPass@my-release-mysql.data.svc.cluster.local:3306/automated_data_pipelines'
 
 finhub:
   token: c7209kqad3ieuiu4i7tg

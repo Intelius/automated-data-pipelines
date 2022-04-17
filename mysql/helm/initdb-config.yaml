@@ -48,3 +48,7 @@ data:
       PRIMARY KEY (`ticker`,`id`,`datetime`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+    -- add service account user
+    CREATE USER 'adp_serviceaccount'@'%' IDENTIFIED BY 'dairDBPass';
+    GRANT Usage ON *.* TO 'adp_serviceaccount'@'%';
+    GRANT Select,Update,Insert ON automated_data_pipelines.* TO 'adp_serviceaccount'@'%';

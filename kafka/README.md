@@ -13,7 +13,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami\
 helm upgrade -i kafka bitnami/kafka -n data -f values.yaml --debug
 ```
 
-# Deployed Information
+# Post-deployement Information
     Kafka can be accessed by consumers via port 9092 on the following DNS name from within your cluster:\
         kafka.data.svc.cluster.local
 

@@ -78,7 +78,7 @@ def predict_main(news: News_Details):
             pass
         # Save results in DB
         try:
-            path = 'mysql+pymysql://root:BoosterPack202!@my-release-mysql.data.svc.cluster.local:3306/automated_data_pipelines'
+            path = 'mysql+pymysql://adp_serviceaccount:dairDBPass@my-release-mysql.data.svc.cluster.local:3306/automated_data_pipelines'
             prediction_mysql_engine = create_engine(path)
             db_result.to_sql(con=prediction_mysql_engine, name="news_sentiment_prediction", if_exists='append', index=False)
             prediction_mysql_engine.dispose()
@@ -95,6 +95,4 @@ def predict_main(news: News_Details):
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=6022)   
-
-
+    uvicorn.run(app, host='0.0.0.0', port=6022)
