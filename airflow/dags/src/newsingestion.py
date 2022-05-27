@@ -8,6 +8,8 @@ from pytz import timezone
 from urllib.request import urlopen
 import logging
 from datetime import datetime, timedelta
+import yaml
+from sqlalchemy import create_engine
 
 ##----------------------- 1. Intialization block-----------------------##   
 tickers = []
@@ -22,17 +24,17 @@ try:
 except Exception as e:
     print(e) 
 
-def extract_news_df_polygonio( api_key):
+def extract_news_df_polygonio(api_key):
     try:
+        dataconfigyml = open("dags/src/dataconfig.yml")
+        dataconfig = yaml.load(dataconfigyml, Loader=yaml.FullLoader)
         df = pd.DataFrame()
-        polygonio = 'https://api.polygon.io/v2/reference/news?published_utc.gte='
-        polygonio_end = '&apiKey='
         print(datetime.now(utc))
         # define a start time to fetch all the news for any ticker
         start_time=datetime.now(utc)-timedelta(minutes=15,seconds=5)
         start_time_str = start_time.strftime('%Y-%m-%dT%H:%M:%S') 
         print(start_time_str)
-        link1 = polygonio  + str(start_time_str) + polygonio_end + api_key 
+        link1 = dataconfig['polygon']['apiurl']  + str(start_time_str) + '&apiKey=' + api_key 
         response = urlopen(link1)
         elevations = response.read()
         data = json.loads(elevations)
@@ -61,12 +63,14 @@ def  DailyNewsPolygonMain(**kwargs):
         tickers = ','.join(confg.getTickerList())
         print("Read ticker news live data from API every 5 mins from Polygon, starts:") 
         tickers_list = tickers.split(",") 
-        import yaml
-        from sqlalchemy import create_engine
-        tickers_list = tickers.split(",") 
+        
+        polygonToken = confg.getPolygonToken()
+        if polygonToken=="":
+            print('Polygon.io token has not been stored yet as an Airflow variable! Please refer to the documentation.')
+            return
         
         # read the news from Polygon IO (calling API)
-        news_df = extract_news_df_polygonio( api_key=  confg.getMarketSourceToken())
+        news_df = extract_news_df_polygonio(api_key = polygonToken)
         
         if not news_df.empty :            
             for i in range(len(news_df)):
@@ -93,7 +97,7 @@ def  DailyNewsPolygonMain(**kwargs):
                                 logging.error(e)
                         prediction_mysql_engine.dispose()
         else:
-            logging.warning('no new news from polygon')
+            logging.info('No new news from polygon')
     except Exception as e:
         print('error in main:')
         print(e)

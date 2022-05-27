@@ -1,4 +1,5 @@
 import yaml
+from airflow.models import Variable
 
 class Configservice():
     ##----------------------- Config Setup -----------------------##
@@ -7,12 +8,15 @@ class Configservice():
     dataconfigyml = open("dags/src/dataconfig.yml")
     dataconfig = yaml.load(dataconfigyml, Loader=yaml.FullLoader)
 
-    ## Get config for market data source token
+    ## Get polygon.io token
     @staticmethod
-    def getMarketSourceToken():
-        cs = Configservice()
-        marketdatasrctkn = cs.dataconfig["auth"]["token"]
-        return marketdatasrctkn
+    def getPolygonToken():
+        return Variable.get("POLYGON_API_KEY", default_var = "")
+    
+    ## Get Finnhub.io token
+    @staticmethod
+    def getFinnhubToken():
+        return Variable.get("FINNHUB_API_KEY", default_var = "")
 
     ## Get ticker list of raw market data
     @staticmethod

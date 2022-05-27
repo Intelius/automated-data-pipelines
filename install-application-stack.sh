@@ -82,6 +82,8 @@ cd /home/$INSTALLUSER/$RELEASEDIRNAME/airflow/
 helm repo add apache-airflow https://airflow.apache.org
 helm repo update
 helm install airflow apache-airflow/airflow -n airflow --create-namespace -f values.yaml
+kubectl exec airflow-worker-0 -n airflow -- airflow variables set POLYGON_API_KEY $POLYGON_API_KEY
+kubectl exec airflow-worker-0 -n airflow -- airflow variables set FINNHUB_API_KEY $FINNHUB_API_KEY
 
 echo -e "\n\n Installing Middle-Tier Services ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/middle-tier

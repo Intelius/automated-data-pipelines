@@ -1,14 +1,13 @@
-
-auth:  
+polygon:  
   apisource: Polygon.io
-  token: TsDjd2WmFwYSsprdEaJkvXlrIRTBlCde
-  apiurl: https://api.polygon.io
+  apiurl: 'https://api.polygon.io/v2/reference/news?published_utc.gte='
+
+finnhub:
+  apisource: finnhub.io
+  apiurl: 'https://finnhub.io/api/v1/stock/candle?symbol='
 
 mysqlsettings:
   dairdb: 'mysql+pymysql://adp_serviceaccount:dairDBPass@my-release-mysql.data.svc.cluster.local:3306/automated_data_pipelines'
-
-finhub:
-  token: c7209kqad3ieuiu4i7tg
 
 tickersubscribelist:
 - AAL

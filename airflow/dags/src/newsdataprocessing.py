@@ -9,6 +9,7 @@ import logging
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine
 import time
+import yaml
 
 ##----------------------- 1. Intialization block-----------------------##   
 try:
@@ -26,7 +27,6 @@ except Exception as e:
 def extract_news_df():
     try:
         df = pd.DataFrame()
-        import yaml
         dataconfigyml = open("dags/src/dataconfig.yml")
         dataconfig = yaml.load(dataconfigyml, Loader=yaml.FullLoader)
         engine_news = create_engine(dataconfig['mysqlsettings']['dairdb'])

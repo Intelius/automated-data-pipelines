@@ -61,15 +61,20 @@ def datetime_to_unix():
 
 def finn_hub_api_call(ticker):
     import requests
-    token = dataconfig['finhub']['token']
-    alphaavantage = 'https://finnhub.io/api/v1/stock/candle?symbol='
-    from_time = '&from='
-    to_time = '&to='
-    timestamp_start, timestamp_end =datetime_to_unix()
-    url = alphaavantage + ticker + '&resolution=1' + from_time + timestamp_start + to_time + timestamp_end + '&token=' + token
-    r = requests.get(url)
-    data = r.json()
-    return  pd.DataFrame.from_dict(data)
+    timestamp_start, timestamp_end = datetime_to_unix()
+    finnhub_token = confg.getFinnhubToken()
+    if finnhub_token=="":
+        print('Finnhub.io token has not been stored yet as an Airflow variable! Please refer to the documentation.')
+        return None
+    
+    url = dataconfig['finnhub']['apiurl'] + ticker + '&resolution=1&from=' + timestamp_start + '&to=' + timestamp_end + '&token=' + finnhub_token
+    
+    try:
+        r = requests.get(url)
+        data = r.json()
+        return  pd.DataFrame.from_dict(data)
+    except:
+        print('Error calling Finnhub API!')
 
 
 def marketdataingestion():
@@ -78,17 +83,18 @@ def marketdataingestion():
     for ticker in tickers_list:
         try:
             df = finn_hub_api_call(ticker= ticker) 
-            df['ticker']= ticker
-            df=df.rename(columns={'c':'close', 'l':'low', 'h':'high', 'o': 'open', 't':'timestamp', 'v':'volume'})
-            df.loc[df.index[0],'timestamp']= unix_to_time (df.loc[df.index[0],'timestamp'])
-            # send the kafka massage to the topic
-            
-            if not df.empty:
-                try:
-                    sendmindatatokafka(aggrlvl='1min', savedStatus=1, \
-                        msgstarttime= datetime.now(tz), itopic='ingestion1min', imsg=df)
-                except Exception as e:
-                    logging.error(e)
+            if df is not None:
+                df['ticker'] = ticker
+                df=df.rename(columns={'c':'close', 'l':'low', 'h':'high', 'o': 'open', 't':'timestamp', 'v':'volume'})
+                df.loc[df.index[0],'timestamp']= unix_to_time (df.loc[df.index[0],'timestamp'])
+                # send the kafka massage to the topic
+                
+                if not df.empty:
+                    try:
+                        sendmindatatokafka(aggrlvl='1min', savedStatus=1, \
+                            msgstarttime= datetime.now(tz), itopic='ingestion1min', imsg=df)
+                    except Exception as e:
+                        logging.error(e)
         except:
-            print("Error ingestion data for ticker: "+ticker)
+            print("Error ingesting data for ticker: "+ticker)
             pass
