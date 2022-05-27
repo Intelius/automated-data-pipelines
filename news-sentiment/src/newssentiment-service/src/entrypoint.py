@@ -88,10 +88,8 @@ def predict_main(news: News_Details):
         response = result.to_json()
 
     except Exception as e:
-        response = str(e)
-        logging.info('error {}'.format(str(e)))
-        logging.info("Processed Time: --- %s seconds --- " % (time.time() - start_time))
-        return response
+        logging.error('Error description: {}'.format(str(e)))
+        return "Error predicting news sentiment!"
 
 
 if __name__ == '__main__':
