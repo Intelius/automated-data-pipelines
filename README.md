@@ -25,5 +25,10 @@ Also, you can refer to ReadMe files in each of the folder in this repository to 
 4. [Presentation](./frontend/README.md)
 5. [Airflow Services](./airflow/README.md)
 
+## Security 
+
+> **Note**: Describes supported versions of major components in this project and how to report security issues. 
+1. [Security Policy](./SECURITY.md)
+
 ## License
 All code and configuration in this package are licensed under the [Apache 2.0 License](LICENSE). Please also refer to the licensing terms of each of the tools used in this package, such as [Apache Airflow license](https://airflow.apache.org/docs/apache-airflow/stable/license.html), [Apache Kafka License](https://github.com/apache/kafka/blob/trunk/LICENSE), and [Bitnami’s MySQL helm chart license](https://artifacthub.io/packages/helm/bitnami/mysql#license). 
