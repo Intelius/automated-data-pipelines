@@ -27,7 +27,7 @@ Also, you can refer to ReadMe files in each of the folder in this repository to 
 
 ## Security 
 
-> **Note**: Describes supported versions of major components in this projects and how to report security issues. 
+> **Note**: Describes supported versions of major components in this project and how to report security issues. 
 1. [Security Policy](./SECURITY.md)
 
 ## License
