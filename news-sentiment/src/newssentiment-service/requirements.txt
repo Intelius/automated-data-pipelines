@@ -5,7 +5,7 @@ pytz==2021.1
 uvicorn==0.13.4
 fastapi==0.75.2
 nltk==3.6.6
-tensorflow==2.7.2
+tensorflow==2.11.1
 tensorflow-estimator
 pydantic==1.7.4
 Keras-Preprocessing==1.1.2
