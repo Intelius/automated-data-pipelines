@@ -18,7 +18,7 @@
 # Please make sure the user matches the one for which you installed and configured Kubernetes
 
 
-DEFAULTRELEASENAME="main" 
+DEFAULTRELEASENAME="helm_chart_upgrade" 
 date
 echo "Starting Intelius Automated Data Pipelines (ADP) Application Installations"
 
@@ -70,7 +70,7 @@ helm upgrade -i kafdrop chart -n data
 echo -e "\n\n Installing MySQL preloaded with the solution database schema ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/mysql/helm/
 kubectl apply -n data -f initdb-config.yaml 
-helm install my-release bitnami/mysql -n data -f values.yaml --version 8.9.6
+helm install my-release bitnami/mysql -n data -f values.yaml --version 9.10.1
 
 echo -e "\n\n Installing News Sentiment Prediction service ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/news-sentiment
@@ -81,7 +81,7 @@ echo -e "\n\n Installing Apache Airflow ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/airflow/
 helm repo add apache-airflow https://airflow.apache.org
 helm repo update
-helm install airflow apache-airflow/airflow -n airflow --create-namespace -f values.yaml
+helm install airflow apache-airflow/airflow -n airflow --create-namespace -f values.yaml --version 1.2.0
 kubectl exec airflow-worker-0 -n airflow -- airflow variables set POLYGON_API_KEY $POLYGON_API_KEY
 kubectl exec airflow-worker-0 -n airflow -- airflow variables set FINNHUB_API_KEY $FINNHUB_API_KEY
 
