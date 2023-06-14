@@ -57,11 +57,12 @@ helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 helm repo update
 helm upgrade --install k8sdashboard kubernetes-dashboard/kubernetes-dashboard  -f ./dashboard-values.yaml --namespace dashboard --create-namespace
 
+kubectl create namespace data
 echo -e "\n\n Installing Apache Kafka ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafka/
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm install kafka bitnami/kafka -n data --create-namespace -f values.yaml
+helm install kafka bitnami/kafka -n data -f values.yaml
 
 echo -e "\n\n Installing Kafdrop ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/kafdrop/
