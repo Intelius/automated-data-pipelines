@@ -33,15 +33,15 @@ uid: 50000
 gid: 0
 
 # Default security context for airflow (deprecated, use `securityContexts` instead)
-securityContext: {}
+# securityContext: {}
 #  runAsUser: 50000
 #  fsGroup: 0
 #  runAsGroup: 0
 
 # Detailed default security context for airflow deployments
-securityContexts:
-  pod: {}
-  containers: {}
+# securityContexts:
+#   pod: {}
+#   containers: {}
 
 # Airflow home directory
 # Used for mount paths
@@ -488,15 +488,15 @@ workers:
       maxUnavailable: "50%"
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext: {}
+  # securityContext: {}
   #  runAsUser: 50000
   #  fsGroup: 0
   #  runAsGroup: 0
 
   # Detailed default security context for worker deployments for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   # Create ServiceAccount
   serviceAccount:
@@ -553,8 +553,8 @@ workers:
     # Annotations to add to worker volumes
     annotations: {}
     # Detailed default security context for persistence for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   kerberosSidecar:
     # Enable kerberos sidecar
@@ -567,8 +567,8 @@ workers:
     #   cpu: 100m
     #   memory: 128Mi
     # Detailed default security context for kerberosSidecar for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   resources: {}
   #  limits:
@@ -658,16 +658,16 @@ workers:
     #   cpu: 100m
     #   memory: 128Mi
     # Detailed default security context for logGroomerSidecar for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   waitForMigrations:
     # Whether to create init container to wait for db migrations
     enabled: true
     env: []
     # Detailed default security context for waitForMigrations for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   env: []
 
@@ -710,15 +710,15 @@ scheduler:
 
   # When not set, the values defined in the global securityContext will be used
   # (deprecated, use `securityContexts` instead)
-  securityContext: {}
+  # securityContext: {}
   #  runAsUser: 50000
   #  fsGroup: 0
   #  runAsGroup: 0
 
   # Detailed default security context for scheduler deployments for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   # Create ServiceAccount
   serviceAccount:
@@ -815,16 +815,16 @@ scheduler:
     #   cpu: 100m
     #   memory: 128Mi
     # Detailed default security context for logGroomerSidecar for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   waitForMigrations:
     # Whether to create init container to wait for db migrations
     enabled: true
     env: []
     # Detailed default security context for waitForMigrations for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   env: []
 
@@ -871,9 +871,9 @@ createUserJob:
   #  runAsGroup: 0
 
   # Detailed default security context for createUserJob for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   # Create ServiceAccount
   serviceAccount:
@@ -940,9 +940,9 @@ migrateDatabaseJob:
   #  runAsGroup: 0
 
   # Detailed default security context for migrateDatabaseJob for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   # Create ServiceAccount
   serviceAccount:
@@ -1057,9 +1057,9 @@ webserver:
   #  runAsGroup: 0
 
   # Detailed default security contexts for webserver deployments for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   # Additional network policies as needed (Deprecated - renamed to `webserver.networkPolicy.ingress.from`)
   extraNetworkPolicies: []
@@ -1183,8 +1183,8 @@ webserver:
     enabled: true
     env: []
     # Detailed default security context for waitForMigrations for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   env: []
 
@@ -1236,9 +1236,9 @@ triggerer:
   #  runAsGroup: 0
 
   # Detailed default security context for triggerer for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
   persistence:
     # Enable persistent volumes
     enabled: true
@@ -1319,16 +1319,16 @@ triggerer:
     #   cpu: 100m
     #   memory: 128Mi
     # Detailed default security context for logGroomerSidecar for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   waitForMigrations:
     # Whether to create init container to wait for db migrations
     enabled: true
     env: []
     # Detailed default security context for waitForMigrations for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
   env: []
 
@@ -1378,9 +1378,9 @@ dagProcessor:
   #  runAsGroup: 0
 
   # Detailed default security context for dagProcessor for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   resources: {}
   #  limits:
@@ -1750,8 +1750,8 @@ pgbouncer:
   uid: 65534
 
   # Detailed default security context for pgbouncer for container level
-  securityContexts:
-    container: {}
+  # securityContexts:
+  #   container: {}
 
   metricsExporterSidecar:
     resources: {}
@@ -1764,8 +1764,8 @@ pgbouncer:
     sslmode: "disable"
 
     # Detailed default security context for metricsExporterSidecar for container level
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
     livenessProbe:
       initialDelaySeconds: 10
@@ -1837,9 +1837,9 @@ redis:
   #  runAsGroup: 0
 
   # Detailed default security context for redis for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   podAnnotations: {}
 # Auth secret for a private registry
@@ -1938,8 +1938,8 @@ cleanup:
   env: []
 
   # Detailed default security context for cleanup for container level
-  securityContexts:
-    container: {}
+  # securityContexts:
+  #   container: {}
 
   # Specify history limit
   # When set, overwrite the default k8s number of successful and failed CronJob executions that are saved.
@@ -2143,8 +2143,8 @@ dags:
     #  runAsUser: 65533
     #  runAsGroup: 0
 
-    securityContexts:
-      container: {}
+    # securityContexts:
+    #   container: {}
 
     extraVolumeMounts: []
     env: []
