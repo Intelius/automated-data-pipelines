@@ -661,13 +661,13 @@ workers:
     # securityContexts:
     #   container: {}
 
-  # waitForMigrations:
-  #   # Whether to create init container to wait for db migrations
-  #   enabled: true
-  #   env: []
-  #   # Detailed default security context for waitForMigrations for container level
-  #   # securityContexts:
-  #   #   container: {}
+  waitForMigrations:
+    # Whether to create init container to wait for db migrations
+    # enabled: true
+    env: []
+    # Detailed default security context for waitForMigrations for container level
+    # securityContexts:
+    #   container: {}
 
   env: []
 
