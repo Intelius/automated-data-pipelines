@@ -1490,7 +1490,7 @@ flower:
   #     memory: 128Mi
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext: {}
+  # securityContext: {}
   #  runAsUser: 50000
   #  fsGroup: 0
   #  runAsGroup: 0
