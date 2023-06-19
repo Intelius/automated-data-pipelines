@@ -661,13 +661,13 @@ workers:
     # securityContexts:
     #   container: {}
 
-  waitForMigrations:
-    # Whether to create init container to wait for db migrations
-    enabled: true
-    env: []
-    # Detailed default security context for waitForMigrations for container level
-    # securityContexts:
-    #   container: {}
+  # waitForMigrations:
+  #   # Whether to create init container to wait for db migrations
+  #   enabled: true
+  #   env: []
+  #   # Detailed default security context for waitForMigrations for container level
+  #   # securityContexts:
+  #   #   container: {}
 
   env: []
 
@@ -1428,22 +1428,22 @@ dagProcessor:
 
   podAnnotations: {}
 
-  logGroomerSidecar:
-    # Whether to deploy the Airflow dag processor log groomer sidecar.
-    enabled: true
-    # Command to use when running the Airflow dag processor log groomer sidecar (templated).
-    command: ~
-    # Args to use when running the Airflow dag processor log groomer sidecar (templated).
-    args: ["bash", "/clean-logs"]
-    # Number of days to retain logs
-    retentionDays: 15
-    resources: {}
-    #  limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    #  requests:
-    #   cpu: 100m
-    #   memory: 128Mi
+  # logGroomerSidecar:
+  #   # Whether to deploy the Airflow dag processor log groomer sidecar.
+  #   enabled: true
+  #   # Command to use when running the Airflow dag processor log groomer sidecar (templated).
+  #   command: ~
+  #   # Args to use when running the Airflow dag processor log groomer sidecar (templated).
+  #   args: ["bash", "/clean-logs"]
+  #   # Number of days to retain logs
+  #   retentionDays: 15
+  #   resources: {}
+  #   #  limits:
+  #   #   cpu: 100m
+  #   #   memory: 128Mi
+  #   #  requests:
+  #   #   cpu: 100m
+  #   #   memory: 128Mi
 
   waitForMigrations:
     # Whether to create init container to wait for db migrations
@@ -1593,9 +1593,9 @@ statsd:
   #  runAsGroup: 0
 
   # Detailed default security context for statsd deployments for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   # Additional network policies as needed
   extraNetworkPolicies: []
