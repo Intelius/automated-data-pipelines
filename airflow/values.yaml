@@ -1496,9 +1496,9 @@ flower:
   #  runAsGroup: 0
 
   # Detailed default security context for flower for container and pod level
-  securityContexts:
-    pod: {}
-    container: {}
+  # securityContexts:
+  #   pod: {}
+  #   container: {}
 
   # Create ServiceAccount
   serviceAccount:
