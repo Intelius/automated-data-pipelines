@@ -51,19 +51,19 @@ airflowHome: /opt/airflow
 defaultAirflowRepository: apache/airflow
 
 # Default airflow tag to deploy
-defaultAirflowTag: "2.6.2"
+defaultAirflowTag: "2.2.1"
 
 # Default airflow digest. If specified, it takes precedence over tag
 defaultAirflowDigest: ~
 
 # Airflow version (Used to make some decisions based on Airflow Version being deployed)
-airflowVersion: "2.6.2"
+airflowVersion: "2.2.1"
 
 # Images
 images:
   airflow:
-    repository: ~
-    tag: ~
+    repository: docker.io/inteliusai/dair_boosterpack_airflow
+    tag: "1.0"
     # Specifying digest takes precedence over tag.
     digest: ~
     pullPolicy: Always
@@ -549,7 +549,7 @@ workers:
     # Execute init container to chown log directory.
     # This is currently only needed in kind, due to usage
     # of local-path provisioner.
-    fixPermissions: true
+    fixPermissions: false
     # Annotations to add to worker volumes
     annotations: {}
     # Detailed default security context for persistence for container level
