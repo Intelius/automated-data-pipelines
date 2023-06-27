@@ -49,10 +49,10 @@ airflowHome: /opt/airflow
 defaultAirflowRepository: apache/airflow
 
 # Default airflow tag to deploy
-defaultAirflowTag: "2.5.1"
+defaultAirflowTag: "2.2.1"
 
 # Airflow version (Used to make some decisions based on Airflow Version being deployed)
-airflowVersion: "2.1.4"
+airflowVersion: "2.2.1"
 
 # Images
 images:
@@ -537,7 +537,7 @@ workers:
     # Execute init container to chown log directory.
     # This is currently only needed in kind, due to usage
     # of local-path provisioner.
-    fixPermissions: true
+    fixPermissions: false
     # Annotations to add to worker volumes
     annotations: {}
 
