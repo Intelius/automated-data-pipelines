@@ -1184,9 +1184,13 @@ postgresql:
   enabled: true
   volumePermissions:
     enabled: true
-  postgresqlPassword: postgres
-  postgresqlUsername: postgres
-
+  # postgresqlPassword: postgres
+  # postgresqlUsername: postgres
+  auth:
+    enablePostgresUser: true
+    postgresPassword: postgres
+    username: ""
+    password: ""
 # Config settings to go into the mounted airflow.cfg
 #
 # Please note that these values are passed through the `tpl` function, so are
