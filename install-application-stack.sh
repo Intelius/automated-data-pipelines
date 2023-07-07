@@ -71,6 +71,7 @@ helm upgrade -i kafdrop chart -n data
 echo -e "\n\n Installing MySQL preloaded with the solution database schema ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/mysql/helm/
 kubectl apply -n data -f initdb-config.yaml 
+helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install my-release bitnami/mysql -n data -f values.yaml
 
