@@ -18,7 +18,7 @@
 # Please make sure the user matches the one for which you installed and configured Kubernetes
 
 
-DEFAULTRELEASENAME="helm_chart_upgrade" 
+DEFAULTRELEASENAME="main" 
 date
 echo "Starting Intelius Automated Data Pipelines (ADP) Application Installations"
 
@@ -71,6 +71,8 @@ helm upgrade -i kafdrop chart -n data
 echo -e "\n\n Installing MySQL preloaded with the solution database schema ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/mysql/helm/
 kubectl apply -n data -f initdb-config.yaml 
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
 helm install my-release bitnami/mysql -n data -f values.yaml
 
 echo -e "\n\n Installing News Sentiment Prediction service ..."
