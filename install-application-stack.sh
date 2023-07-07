@@ -18,7 +18,7 @@
 # Please make sure the user matches the one for which you installed and configured Kubernetes
 
 
-DEFAULTRELEASENAME="helm_chart_upgrade" 
+DEFAULTRELEASENAME="main" 
 date
 echo "Starting Intelius Automated Data Pipelines (ADP) Application Installations"
 
