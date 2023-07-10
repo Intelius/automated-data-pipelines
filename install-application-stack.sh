@@ -55,7 +55,7 @@ echo -e "\n\n Installing K8s Dashboard ..."
 cd /home/$INSTALLUSER/$RELEASEDIRNAME/k8sdashboard/
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 helm repo update
-helm upgrade --install k8sdashboard kubernetes-dashboard/kubernetes-dashboard  -f ./dashboard-values.yaml --namespace dashboard --create-namespace --version 2.7.0
+helm upgrade --install k8sdashboard kubernetes-dashboard/kubernetes-dashboard  -f ./dashboard-values.yaml --namespace dashboard --create-namespace --version 6.0.8
 
 kubectl create namespace data
 echo -e "\n\n Installing Apache Kafka ..."
